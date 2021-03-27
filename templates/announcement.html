@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="../static/announcement.css">
+        <title>CSCB63 Announcement Page</title>
+    </head>
+
+    <body>
+        {% extends "index.html" %}
+        {% block content %}
+        <div class="content">
+            <h3>Course Announcement</h3>
+            <hr class="description">
+
+            <ul class="announce">
+                <li class="odd">Mar. 7th, 2021: The assignment 3 is posted.</li>
+                <li class="even">Mar. 5th, 2021: The term test 2 is pushed to next Wednesday lecture time.</li>
+                <li class="odd">Mar. 2nd, 2021: The assignment 2 coding part is due with assignment 3.</li>
+                <li class="even">Feb. 25th, 2021: The term test 1 grading is out on Gradescope.</li>
+                <li class="odd">Feb. 20th, 2021: Assignment 2 is up, you can start on it now.</li>
+            </ul>
+        </div>
+        {% endblock %}
+    </body>
+</html>
