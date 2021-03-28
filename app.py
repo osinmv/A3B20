@@ -146,8 +146,7 @@ def index():
     global username
     if username is not None:
         return render_template("index.html")
-    return 'please login first'
-
+    return redirect(url_for('login'))
 
 @app.route('/announcement')
 def announcement():
