@@ -1,7 +1,8 @@
 from flask import Flask, render_template, url_for, request, redirect, g
 import sqlite3
 DATABASE = './assignment3.db'
-
+username = None
+password = None
 
 def get_db():
     """Return database"""
@@ -142,7 +143,10 @@ def index():
     # if db is not None:
     # close the database if we are connected to it
     #    db.close()
-    return render_template("index.html")
+    global username
+    if username is not None:
+        return render_template("index.html")
+    return 'please login first'
 
 
 @app.route('/announcement')
@@ -175,9 +179,23 @@ def tutorial():
 def assignment():
     return render_template('assignment.html')
 
-@app.route('/login')
+@app.route('/login', methods = ['GET', 'POST'])
 def login():
-    return render_template('login.html')
+    global username
+    global password
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if isUser(username, password):
+            return redirect(url_for('index'))
+        else:
+            username = None
+            password = None
+            return 'User does not exist, check your password/signup to login to the course website'
+    elif username is not None and password is not None:
+        return redirect(url_for('index'))
+    else:
+        return render_template('login.html')
 
 @app.route('/signup')
 def signup():
