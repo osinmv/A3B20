@@ -1,0 +1,79 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family:sans-serif;
+
+}
+
+body{
+    background: url('download.jpg') no-repeat;
+    background-size: cover;
+}
+
+
+.login-form{
+    width:350px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    color: #fff;
+}
+
+.login-form h1{
+    font-size: 40px;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 40px 0;
+}
+
+.login-form p{
+    font-size: 20px;
+    margin: 15px 0;
+}
+
+.login-form input{
+    font-size: 16px;
+    width: 100%;
+    padding: 15px 10px;
+    border: 0;
+    outline:none;
+    border-radius: 5px;
+
+}
+
+.login-form text{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px 0;
+    padding: 10px 15px;
+    width: 50%;
+    border-radius: 5px;
+    border: 0;
+}
+
+.button{
+    border: 1px solid #3498db;
+    background: blue;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-family: "montserrat";
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.8s;
+}
+
+.btn1 {
+    color: #3498db;
+}
+
+
+.btn1 {
+    color: #3498db;
+}
+
+
+.btn1:hover {
+
+    color: #fff;
+}
