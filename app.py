@@ -12,6 +12,10 @@ def index():
 def announcement():
     return render_template('announcement.html')
 
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
 
 @app.route('/piazza')
 def piazza():
