@@ -6,9 +6,10 @@
 }
 
 body{
-    background: url('./uoft.jpg') no-repeat;
+    background: url('download.jpg') no-repeat;
     background-size: cover;
 }
+
 
 .login-form{
     width:350px;
@@ -49,4 +50,25 @@ body{
     width: 50%;
     border-radius: 5px;
     border: 0;
+}
+
+.button{
+    border: 1px solid #3498db;
+    background: none;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-family: "montserrat";
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.8s;
+}
+
+.btn1 {
+    color: #3498db;
+}
+
+.btn1:hover {
+
+    color: #fff;
+
 }
