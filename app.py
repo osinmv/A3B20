@@ -137,7 +137,7 @@ def index():
     # addRegradeRequest("Max", "want to regrade second assignment")
     # addUser("student3", "student3", 0)
     # addUserMarks("student3")
-    updateUserMarks("student3", [1, 0, 1, 0, 0, 0])
+    # updateUserMarks("student3", [1, 0, 1, 0, 0, 0])
     # db = getattr(g, '_database', None)
     # if db is not None:
     # close the database if we are connected to it
