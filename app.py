@@ -12,9 +12,6 @@ def index():
 def announcement():
     return render_template('announcement.html')
 
-@app.route('/login')
-def login():
-    return render_template('login.html')
 
 
 @app.route('/piazza')
@@ -40,6 +37,10 @@ def tutorial():
 @app.route('/assignment')
 def assignment():
     return render_template('assignment.html')
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
 
 
 @app.route('/feedback', methods=['GET', 'POST'])
