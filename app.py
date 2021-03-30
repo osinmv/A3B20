@@ -142,12 +142,12 @@ def index():
     # close the database if we are connected to it
     #    db.close()
     if 'username' in session:
-        return render_template("index.html")
+        return render_template("index.html", Ins = isInstructor(session['username']))
     return redirect(url_for('login'))
 
 @app.route('/announcement')
 def announcement():
-    return render_template('announcement.html')
+    return render_template('announcement.html', Ins = isInstructor(session['username']))
 
 
 
@@ -158,22 +158,22 @@ def piazza():
 
 @app.route('/calendar')
 def calendar():
-    return render_template('calendar.html')
+    return render_template('calendar.html', Ins = isInstructor(session['username']))
 
 
 @app.route('/lecture')
 def lecture():
-    return render_template('lecture.html')
+    return render_template('lecture.html', Ins = isInstructor(session['username']))
 
 
 @app.route('/tutorial')
 def tutorial():
-    return render_template('tutorial.html')
+    return render_template('tutorial.html', Ins = isInstructor(session['username']))
 
 
 @app.route('/assignment')
 def assignment():
-    return render_template('assignment.html')
+    return render_template('assignment.html', Ins = isInstructor(session['username']))
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
@@ -195,13 +195,18 @@ def login():
 def signup():
     return render_template('signup.html')
 
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    session.pop('password', None)
+    return 'you logged out'
 
 @app.route('/feedback', methods=['GET', 'POST'])
 def feedback():
     if request.method == 'GET':
-        return render_template('feedback.html')
+        return render_template('feedback.html', Ins = isInstructor(session['username']))
     if request.method == 'POST':
-        return render_template('accept.html')
+        return render_template('accept.html', Ins = isInstructor(session['username']))
 
 
 if __name__ == '__main__':

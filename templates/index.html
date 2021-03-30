@@ -14,6 +14,7 @@
             <hr id="Header-line">
             <div class="menu-container">
                 <ul>
+                    {% if Ins == False %}
                     <li><a href="{{ url_for('index') }}">HOME</a></li>
                     <li><a href="{{ url_for('announcement') }}">ANNOUNCEMENT</a></li>
                     <li><a href="{{ url_for('piazza') }}">PIAZZA</a></li>
@@ -22,6 +23,15 @@
                     <li><a href="{{ url_for('tutorial') }}">TUTORIAL</a></li>
                     <li><a href="{{ url_for('assignment') }}">ASSIGNMENTS</a></li>
                     <li><a href="{{ url_for('feedback') }}">FEEDBACK</a></li>
+                    {% else %}
+                    <li><a href="{{ url_for('index') }}">HOME</a></li>
+                    <li><a href="{{ url_for('announcement') }}">ANNOUNCEMENT</a></li>
+                    <li><a href="{{ url_for('piazza') }}">PIAZZA</a></li>
+                    <li><a href="{{ url_for('calendar') }}">CALENDAR</a></li>
+                    <li><a href="{{ url_for('lecture') }}">LECTURE NOTE</a></li>
+                    <li><a href="{{ url_for('tutorial') }}">TUTORIAL</a></li>
+                    <li><a href="{{ url_for('assignment') }}">ASSIGNMENTS</a></li>
+                    {% endif %}
                 </ul>
                 
             </div>
