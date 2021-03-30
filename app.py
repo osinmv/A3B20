@@ -1,8 +1,6 @@
-from flask import Flask, render_template, url_for, request, redirect, g
+from flask import Flask, render_template, url_for, request, redirect, g, session
 import sqlite3
 DATABASE = './assignment3.db'
-username = None
-password = None
 
 def get_db():
     """Return database"""
@@ -121,7 +119,7 @@ def updateUserMarks(username: str, marks: list):
 
 
 app = Flask(__name__)
-
+app.secret_key = 'cscb63'
 
 @app.teardown_appcontext
 def close_connection(exception):
@@ -143,8 +141,7 @@ def index():
     # if db is not None:
     # close the database if we are connected to it
     #    db.close()
-    global username
-    if username is not None:
+    if 'username' in session:
         return render_template("index.html")
     return redirect(url_for('login'))
 
@@ -180,18 +177,16 @@ def assignment():
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
-    global username
-    global password
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        if isUser(username, password):
+        session['username'] = request.form['username']
+        session['password'] = request.form['password']
+        if isUser(session['username'], session['password']):
             return redirect(url_for('index'))
         else:
-            username = None
-            password = None
+            session.pop('username', None)
+            session.pop('password', None)
             return 'User does not exist, check your password/signup to login to the course website'
-    elif username is not None and password is not None:
+    elif 'username' in session and 'password' in session:
         return redirect(url_for('index'))
     else:
         return render_template('login.html')
