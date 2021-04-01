@@ -123,6 +123,27 @@ h3{
     font-size: 30px;
 }
 
+.welcome{
+    text-align: right;
+    color: antiquewhite;
+    margin-bottom: -10px;
+    font-size: 14px;
+}
+
+.welcome p{
+    font-size: 14px;
+}
+
+.logout{
+    color: antiquewhite;
+}
+
+.logout:hover{
+    color: rgb(0, 0, 0);
+    background-color: rgba(250, 235, 215, 0.801);
+    border-radius: 10%;
+}
+
 h4{
     font-size: 21px;
 }

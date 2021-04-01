@@ -154,15 +154,13 @@ def index():
     # close the database if we are connected to it
     #    db.close()
     if 'username' in session:
-        return render_template("index.html",
-                               Ins=isInstructor(session['username']))
+        return render_template("index.html", Ins=isInstructor(session['username']), username=session['username'])
     return redirect(url_for('login'))
 
 
 @app.route('/announcement')
 def announcement():
-    return render_template('announcement.html',
-                           Ins=isInstructor(session['username']))
+    return render_template('announcement.html', Ins=isInstructor(session['username']), username=session['username'])
 
 
 @app.route('/piazza')
@@ -172,26 +170,22 @@ def piazza():
 
 @app.route('/calendar')
 def calendar():
-    return render_template('calendar.html',
-                           Ins=isInstructor(session['username']))
+    return render_template('calendar.html', Ins=isInstructor(session['username']), username=session['username'])
 
 
 @app.route('/lecture')
 def lecture():
-    return render_template('lecture.html',
-                           Ins=isInstructor(session['username']))
+    return render_template('lecture.html', Ins=isInstructor(session['username']), username=session['username'])
 
 
 @app.route('/tutorial')
 def tutorial():
-    return render_template('tutorial.html',
-                           Ins=isInstructor(session['username']))
+    return render_template('tutorial.html', Ins=isInstructor(session['username']), username=session['username'])
 
 
 @app.route('/assignment')
 def assignment():
-    return render_template('assignment.html',
-                           Ins=isInstructor(session['username']))
+    return render_template('assignment.html', Ins=isInstructor(session['username']), username=session['username'])
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -236,9 +230,9 @@ def logout():
 @ app.route('/feedback', methods=['GET', 'POST'])
 def feedback():
     if request.method == 'GET':
-        return render_template('feedback.html', Ins = isInstructor(session['username']))
+        return render_template('feedback.html', Ins=isInstructor(session['username']), username=session['username'])
     elif request.method == 'POST':
-        return render_template('accept.html', Ins = isInstructor(session['username']))
+        return render_template('accept.html', Ins=isInstructor(session['username']), username=session['username'])
 
 
 if __name__ == '__main__':
