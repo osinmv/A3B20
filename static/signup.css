@@ -6,7 +6,7 @@
 }
 
 body{
-    background: url('download.jpg') no-repeat;
+    background: url('uoft.jpg') no-repeat;
     background-size: cover;
 }
 
@@ -39,7 +39,6 @@ body{
     border: 0;
     outline:none;
     border-radius: 5px;
-
 }
 
 .login-form text{
