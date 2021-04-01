@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, request, redirect, g, session
 import sqlite3
 DATABASE = './assignment3.db'
 
+
 def get_db():
     """Return database"""
     db = getattr(g, '_database', None)
@@ -64,8 +65,18 @@ def get_regrade_requests():
     return query_db("""SELECT * FROM RegradeRequests;""", (), one=False)
 
 
-def isUser(username: str, password: str):
+def isUser(username: str):
     """Return True if username is in database"""
+    result = query_db(
+        """SELECT username FROM User WHERE User.username == ?;""",
+        args=(username,))
+    if result is None:
+        return False
+    return True
+
+
+def validate(username: str, password: str):
+    """Return true if username and password are correct"""
     result = query_db("""SELECT username FROM User WHERE User.username == ?
                     AND User.password == ?;""",
                       args=(username, password,))
@@ -121,6 +132,7 @@ def updateUserMarks(username: str, marks: list):
 app = Flask(__name__)
 app.secret_key = 'cscb63'
 
+
 @app.teardown_appcontext
 def close_connection(exception):
     db = getattr(g, '_database', None)
@@ -142,13 +154,15 @@ def index():
     # close the database if we are connected to it
     #    db.close()
     if 'username' in session:
-        return render_template("index.html", Ins = isInstructor(session['username']))
+        return render_template("index.html",
+                               Ins=isInstructor(session['username']))
     return redirect(url_for('login'))
+
 
 @app.route('/announcement')
 def announcement():
-    return render_template('announcement.html', Ins = isInstructor(session['username']))
-
+    return render_template('announcement.html',
+                           Ins=isInstructor(session['username']))
 
 
 @app.route('/piazza')
@@ -158,29 +172,34 @@ def piazza():
 
 @app.route('/calendar')
 def calendar():
-    return render_template('calendar.html', Ins = isInstructor(session['username']))
+    return render_template('calendar.html',
+                           Ins=isInstructor(session['username']))
 
 
 @app.route('/lecture')
 def lecture():
-    return render_template('lecture.html', Ins = isInstructor(session['username']))
+    return render_template('lecture.html',
+                           Ins=isInstructor(session['username']))
 
 
 @app.route('/tutorial')
 def tutorial():
-    return render_template('tutorial.html', Ins = isInstructor(session['username']))
+    return render_template('tutorial.html',
+                           Ins=isInstructor(session['username']))
 
 
 @app.route('/assignment')
 def assignment():
-    return render_template('assignment.html', Ins = isInstructor(session['username']))
+    return render_template('assignment.html',
+                           Ins=isInstructor(session['username']))
 
-@app.route('/login', methods = ['GET', 'POST'])
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         session['username'] = request.form['username']
         session['password'] = request.form['password']
-        if isUser(session['username'], session['password']):
+        if validate(session['username'], session['password']):
             return redirect(url_for('index'))
         else:
             session.pop('username', None)
@@ -191,17 +210,30 @@ def login():
     else:
         return render_template('login.html')
 
-@app.route('/signup')
-def signup():
-    return render_template('signup.html')
 
-@app.route('/logout')
+@app.route('/signup', methods=["GET", "POST"])
+def signup():
+    if request.method == "POST":
+        if(not isUser(request.form["username"])):
+            addUser(request.form["username"], request.form["password"],
+                    int(request.form["persontype"]))
+            if(int(request.form["persontype"]) == 0):
+                addUserMarks(request.form["username"])
+            return render_template("login.html")
+        else:
+            return render_template('signup.html')
+    else:
+        return render_template('signup.html')
+
+
+@ app.route('/logout')
 def logout():
     session.pop('username', None)
     session.pop('password', None)
     return 'you logged out'
 
-@app.route('/feedback', methods=['GET', 'POST'])
+
+@ app.route('/feedback', methods=['GET', 'POST'])
 def feedback():
     if request.method == 'GET':
         return render_template('feedback.html', Ins = isInstructor(session['username']))

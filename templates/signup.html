@@ -4,24 +4,23 @@
 <head>
     <title>Login Form</title>
     <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="../static/signup.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../static/login.css">
 </head>
 
 <body>
     <div class="login-form">
-       
         <form actions="#" method="post">
             <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
 
             <h1>CSCB63 Sign up</h1>
             <p>First Name</p>
-          
-            <input type="text" name="username" placeholder="Enter your first name">
+
+            <input type="text" name="first_name" placeholder="Enter your first name">
 
             <p>Last Name</p>
-            <input type="text" name="password" placeholder="Enter your last name">
+            <input type="text" name="second_name" placeholder="Enter your last name">
 
             <p>Username</p>
             <input type="text" name="username" placeholder="Enter your username">
@@ -29,40 +28,15 @@
             <p>Password</p>
             <input type="text" name="password" placeholder="Enter your password">
 
-            <p>Confirm Password</p>
-            <input type="text" name="password" placeholder="Enter your password">
-
             <br><br>
 
             <label>Type of user</label>
-
-     
-
-             <!-- Fix up the radio buttons and allign them -->
-
-           <input type="radio" name="gender" value="male"> Student
-<input type="radio" name="gender" value="female"> Instructor
-
-
-
-            
+            <!-- Fix up the radio buttons and allign them -->
+            <input type="radio" name="persontype" value="0"> Student
+            <input type="radio" name="persontype" value="1"> Instructor
+            <input type="submit" value="submit">
         </form>
-
-        <button class='button btn1'>Login</button>
-       
-
-
-        <h2>New to CSCB63?</h2>
-
-       
-        <button class='button btn1'>Sign up</button>
-    
-
     </div>
-
-
-
-
 </body>
 
 </html>
