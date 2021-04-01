@@ -1,0 +1,57 @@
+*{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS';
+}
+
+body{
+    background: url('../uoft.jpg') no-repeat;
+    background-size: cover;
+    background-color: rgba(146, 145, 145, 0.199);
+    color: antiquewhite;
+}
+
+
+#content{
+    width: 500px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    background-color: rgba(54, 54, 54, 0.897);
+    border: 10px solid rgba(54, 54, 54, 0.897);
+}
+
+#logoutmsg{
+    margin-left: 20px;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.msg{
+    font-size: 18px;
+    margin-left: 20px;
+}
+
+#backbtn{
+    text-align: left;
+}
+
+button{
+    border: 1px solid #3498db;
+    background: none;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-family: "montserrat";
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.8s;
+    color: #3498db;
+}
+
+button:hover{
+    color: antiquewhite;
+}
+
+button:active{
+    color: antiquewhite;
+    border: 1px solid antiquewhite;
+}

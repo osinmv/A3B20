@@ -224,7 +224,7 @@ def signup():
 def logout():
     session.pop('username', None)
     session.pop('password', None)
-    return 'you logged out'
+    return render_template('logout.html')
 
 
 @ app.route('/feedback', methods=['GET', 'POST'])
