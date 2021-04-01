@@ -99,6 +99,11 @@ h3{
     font-size: 30px;
 }
 
+.question{
+    font-weight: bold;
+    font-size: 18px;
+}
+
 body {
 	background-color: rgba(146, 145, 145, 0.199);
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -115,10 +120,12 @@ body {
     font-size: 16px;
     cursor: pointer;
     text-align: center;
+    border-radius: 19px;
+    margin-top: 20px;
   }
 
   
   .block:hover {
     background-color: black;
-    color:white;
+    color:antiquewhite;
   }

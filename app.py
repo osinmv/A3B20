@@ -205,7 +205,7 @@ def logout():
 def feedback():
     if request.method == 'GET':
         return render_template('feedback.html', Ins = isInstructor(session['username']))
-    if request.method == 'POST':
+    elif request.method == 'POST':
         return render_template('accept.html', Ins = isInstructor(session['username']))
 
 
