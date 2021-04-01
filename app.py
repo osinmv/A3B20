@@ -219,9 +219,9 @@ def signup():
                     int(request.form["persontype"]))
             if(int(request.form["persontype"]) == 0):
                 addUserMarks(request.form["username"])
-            render_template("login.html")
+            return render_template("login.html")
         else:
-            return "<h1>User Already Exists</h1>"
+            return render_template('signup.html')
     else:
         return render_template('signup.html')
 
