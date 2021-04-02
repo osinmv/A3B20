@@ -52,11 +52,12 @@ def get_student_marks(username: str):
                     WHERE StudentMark.username == ?;""",
                     (username,), one=True)
 
-def get_instructors(username: str):
-    """Return instructors for the student"""
+def get_instructors():
+    """Return instructors"""
     return query_db("""SELECT * FROM User 
-                    WHERE User.isInstructor == ?;""",
-                    (username,), one=False)
+                    WHERE User.isInstructor == 1;""",
+                    (), one=False)
+
 
 
 
@@ -226,12 +227,15 @@ def signup():
     else:
         return render_template('signup.html')
     
- @app.route('/feedback', methods=['GET', 'POST'])
+@app.route('/feedback', methods=['GET', 'POST'])
 def feedback():
     if request.method == 'GET':
-        return render_template('feedback.html', Ins=isInstructor(session['username']), username=session['username'] , instructors=get_instructors(session['username']))
-    elif request.method == 'POST':
-        return render_template('accept.html', Ins=isInstructor(session['username']), username=session['username'],  instructors=get_instructors(session['username']))
+        return render_template('feedback.html',
+                               Ins=isInstructor(session['username']) , instructors=get_instructors())
+    if request.method == 'POST':
+        return render_template('accept.html',
+                               Ins=isInstructor(session['username']), instructors=get_instructors())
+
     
 
 
