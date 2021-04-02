@@ -227,12 +227,53 @@ def logout():
     return render_template('logout.html')
 
 
-@ app.route('/feedback', methods=['GET', 'POST'])
+@app.route('/feedback', methods=['GET', 'POST'])
 def feedback():
     if request.method == 'GET':
         return render_template('feedback.html', Ins=isInstructor(session['username']), username=session['username'])
     elif request.method == 'POST':
         return render_template('accept.html', Ins=isInstructor(session['username']), username=session['username'])
+    
+    
+@app.route('/studentmark')
+def studentmark():
+    return render_template('studentmark.html',Ins=isInstructor(session['username']))
+
+
+    
+    @app.route('/remarkrequest', methods=['GET', 'POST'])
+def remarkrequest():
+    if request.method == 'GET':
+        return render_template('remarkrequest.html',
+                                variable='test',Ins=isInstructor(session['username']))
+
+    if request.method == 'POST':
+        return render_template('sentremark.html',
+                                Ins=isInstructor(session['username']))
+
+
+                    
+@app.route('/remarkrequesta2', methods=['GET', 'POST'])                
+def remarkrequesta2():
+    if request.method == 'GET':
+        return render_template('remarkrequesta2.html',
+                                variable='test',Ins=isInstructor(session['username']))
+
+    if request.method == 'POST':
+        return render_template('sentremark.html',
+                                Ins=isInstructor(session['username']))
+
+
+@app.route('/remarkrequesta3', methods=['GET', 'POST'])                
+def remarkrequesta3():
+    if request.method == 'GET':
+        return render_template('remarkrequesta3.html',
+                                variable='test',Ins=isInstructor(session['username']))
+
+    if request.method == 'POST':
+        return render_template('sentremark.html',
+                                Ins=isInstructor(session['username']))
+
 
 
 if __name__ == '__main__':
