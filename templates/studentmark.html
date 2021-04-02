@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../static/assignment.css">
+    <title>Your marks</title>
+</head>
+
+<body>
+    {% extends "index.html" %}
+    {% block content %}
+    <div class="content">
+        <h3>Your marks</h3>
+        <hr class="description">
+
+        <div class="grid-container">
+            <div id="grid-item1">
+                <h4>Assignment</h4>
+            </div>
+            <div id="grid-item2">
+                <h4>Mark</h4>
+            </div>
+            <div id="grid-item3">
+                <h4>Remark request</h4>
+            </div>
+
+            <div class="col1">
+                <a class="link" >Assignment
+                    1</a>
+            </div>
+            <div class="col2">
+                <p>60</p>
+            </div>
+            <div class="col3">
+
+                <a style="display: inline;" class="link" href="{{ url_for('remarkrequest') }}">Remark</a>
+            </div>
+
+            <div class="col1">
+                <a class="link" >Assignment
+                    2</a>
+            </div>
+            <div class="col2">
+                <p>70</p>
+            </div>
+            <div class="col3">
+
+                <a style="display: inline;" class="link" href="{{ url_for('remarkrequesta2') }}">Remark</a>
+            </div>
+
+            <div class="col1">
+                <a class="link">Assignment
+                    3</a>
+            </div>
+            <div class="col2">
+                <p>80</p>
+            </div>
+            <div class="col3">
+
+                <a style="display: inline;" class="link" href="{{ url_for('remarkrequesta3') }}">Remark</a>
+            </div>
+
+            <div class="col1">
+                <a class="link" >Assignment
+                    4</a>
+            </div>
+            <div class="col2">
+                <p>100</p>
+            </div>
+            <div class="col3">
+
+                <a style="display: inline;" class="link" href="">Remark</a>
+            </div>
+
+            <div class="col1">
+                <a class="link" >Test 1</a>
+            </div>
+            <div class="col2">
+                <p>100</p>
+            </div>
+            <div class="col3">
+
+                <a style="display: inline;" class="link" href="">Remark</a>
+            </div>
+
+            <div class="col1">
+                <a class="link" >Test 2</a>
+            </div>
+            <div class="col2">
+                <p>100</p>
+            </div>
+            <div class="col3">
+
+                <a style="display: inline;" class="link" href="">Remark</a>
+            </div>
+
+            <div class="col1">
+                <a class="link" >Test 3</a>
+            </div>
+            <div class="col2">
+                <p>100</p>
+            </div>
+            <div class="col3">
+
+                <a style="display: inline;" class="link" href="">Remark</a>
+            </div>
+
+            <div class="col1">
+                <a class="link" >Final
+                    Exam</a>
+            </div>
+            <div class="col2">
+                <p>100</p>
+            </div>
+            <div class="col3">
+
+                <a style="display: inline;" class="link" href="">Remark</a>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    {% endblock %}
+</body>
+
+
+</html>
