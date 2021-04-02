@@ -273,6 +273,39 @@ def remarkrequesta3():
     if request.method == 'POST':
         return render_template('sentremark.html',
                                 Ins=isInstructor(session['username']))
+    
+  @app.route('/remarkrequesta4', methods=['GET', 'POST'])                
+def remarkrequesta4():
+    if request.method == 'GET':
+        return render_template('remarkrequesta4.html',
+                                variable='test',Ins=isInstructor(session['username']))
+
+    if request.method == 'POST':
+        return render_template('sentremark.html',
+                                Ins=isInstructor(session['username']))
+
+                                
+@app.route('/remarkrequestmidterm', methods=['GET', 'POST'])                
+def remarkrequestmidterm():
+    if request.method == 'GET':
+        return render_template('remarkrequestmidterm.html',
+                                variable='test',Ins=isInstructor(session['username']))
+
+    if request.method == 'POST':
+        return render_template('sentremark.html',
+                                Ins=isInstructor(session['username']))
+
+
+                                
+@app.route('/remarkrequestfinal', methods=['GET', 'POST'])                
+def remarkrequestfinal():
+    if request.method == 'GET':
+        return render_template('remarkrequestfinal.html',
+                                variable='test',Ins=isInstructor(session['username']))
+
+    if request.method == 'POST':
+        return render_template('sentremark.html',
+                                Ins=isInstructor(session['username']))
 
 
 
