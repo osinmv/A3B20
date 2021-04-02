@@ -15,6 +15,13 @@
         <div class="content">
             <h3>Course Feedback</h3>
             <hr class="description">
+            
+              <p>Select your instructor</p>
+
+            <input type="radio"  name="Abbas">
+            <label for="A">{{instructors[0]}}</label><br>
+            <label for="A">{{instructors[1]}}</label><br>
+            <label for="A">{{instructors[2]}}</label><br>
 
             <div class="container">
                 <form action="{{ url_for('feedback')}}" method="POST">
