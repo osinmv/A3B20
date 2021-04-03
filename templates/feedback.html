@@ -20,11 +20,13 @@
             <div class="container">
                 <form action="{{ url_for('feedback')}}" method="POST">
                     <p>Select your instructor</p>
-
-                    {% for item in instructors %}
-                        <input type="radio" name= "Instruct_name" value="{{item['username']}}">
+                    <table data-req="1">
+                        {% for item in instructors %}
+                        <input type="radio" name= "Instruct_name" value="{{item['username']}}" required>
                         <label for= "A"> {{item['username']}} </label> <br>
-                    {% endfor %}
+                        {% endfor %}
+                    </table>
+                    
 
                     <br>
                     <p>What do you like about the instructor teaching?</p>
@@ -32,6 +34,15 @@
                     <p>OR</p>
 
                     <p>What do you recommend the instructor to do to improve their teaching?</p>
+
+                    <p>OR</p>
+
+                    <p>What do you like about the labs?</p>
+
+                    <p>OR</p>
+
+                    <p>What do you recommend the lab instructors to do to improve their lab teaching?</p>
+
                     <textarea name="teachImprove"  placeholder="Enter feedback here." rows="10" cols="180"></textarea>
 
                     <br/>
