@@ -340,5 +340,35 @@ def showAllGrade():
     db.close()
     return render_template('showAllGrade.html', grade=grades, username=username, Ins=Ins)
 
+@app.route('/checkFeedback')
+def checkFeedback():
+    db = get_db()
+    db.row_factory = make_dicts
+
+    username=session['username']
+    Ins=isInstructor(session['username'])
+    feedbacks = []
+    for feedback in get_feedback(session['username']):
+        feedbacks.append(feedback)
+    
+    db.close()
+    return render_template('checkFeedback.html', feedback=feedbacks, username=username, Ins=Ins)
+    
+
+@app.route('/checkRegrade')
+def checkRegrade():
+    db = get_db()
+    db.row_factory = make_dicts
+
+    username=session['username']
+    Ins=isInstructor(session['username'])
+    requests = []
+    for request in get_regrade_requests():
+        requests.append(request)
+    
+    db.close()
+    return render_template('checkRegrade.html', request=requests, username=username, Ins=Ins)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
