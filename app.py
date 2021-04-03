@@ -124,7 +124,7 @@ def addUserMarks(username: str):
 
 def addFeedback(username: str, q1: str, q2: str, q3: str, q4: str):
     """Add content to database"""
-    update_db("""INSERT INTO Feedback VALUES (?,?);""",
+    update_db("""INSERT INTO Feedback VALUES (?,?,?,?,?);""",
               args=(username, q1, q2, q3, q4,))
 
 
@@ -245,7 +245,7 @@ def feedback():
                                Ins=isInstructor(session['username']), instructors=get_instructors(),  username=session['username'])
     if request.method == 'POST':
         addFeedback(request.form["Instruct_name"],
-                    request.form['teaching'] + " " + request.form['teachImprove'] + " " + request.form['labs'] + " " + request.form['labImprove'])
+                    request.form['teaching'], request.form['teachImprove'], request.form['labs'], request.form['labImprove'])
         return render_template('accept.html',
                                Ins=isInstructor(session['username']),  username=session['username'])
 
@@ -265,11 +265,13 @@ def studentmark():
 @app.route('/remarkrequest', methods=['GET', 'POST'])
 def remarkrequest():
     if request.method == 'GET':
+        db = get_db()
+        db.row_factory = make_dicts
         return render_template('remarkrequesta1.html',
-                               variable='test', Ins=isInstructor(session['username']), username=session['username'])
+                               variable='test', instructors=get_instructors(), Ins=isInstructor(session['username']), username=session['username'])
 
     if request.method == 'POST':
-        addRegradeRequest(session['username'], "A1. "+request.form['message'])
+        addRegradeRequest(session['username'], "A1. "+request.form['message'], request.form["Instruct_name"])
         return render_template('sentremark.html',
                                Ins=isInstructor(session['username']), username=session['username'])
 
@@ -277,11 +279,13 @@ def remarkrequest():
 @app.route('/remarkrequesta2', methods=['GET', 'POST'])
 def remarkrequesta2():
     if request.method == 'GET':
+        db = get_db()
+        db.row_factory = make_dicts
         return render_template('remarkrequesta2.html',
-                               variable='test', Ins=isInstructor(session['username']))
+                               variable='test', instructors=get_instructors(), Ins=isInstructor(session['username']))
 
     if request.method == 'POST':
-        addRegradeRequest(session['username'], "A2. "+request.form['message'])
+        addRegradeRequest(session['username'], "A2. "+request.form['message'], request.form["Instruct_name"])
         return render_template('sentremark.html',
                                Ins=isInstructor(session['username']))
 
@@ -289,11 +293,13 @@ def remarkrequesta2():
 @app.route('/remarkrequesta3', methods=['GET', 'POST'])
 def remarkrequesta3():
     if request.method == 'GET':
+        db = get_db()
+        db.row_factory = make_dicts
         return render_template('remarkrequesta3.html',
-                               variable='test', Ins=isInstructor(session['username']))
+                               variable='test', instructors=get_instructors(), Ins=isInstructor(session['username']))
 
     if request.method == 'POST':
-        addRegradeRequest(session['username'], "A3. "+request.form['message'])
+        addRegradeRequest(session['username'], "A3. "+request.form['message'], request.form["Instruct_name"])
         return render_template('sentremark.html',
                                Ins=isInstructor(session['username']))
 
@@ -301,11 +307,13 @@ def remarkrequesta3():
 @app.route('/remarkrequesta4', methods=['GET', 'POST'])
 def remarkrequesta4():
     if request.method == 'GET':
+        db = get_db()
+        db.row_factory = make_dicts
         return render_template('remarkrequesta4.html',
-                               variable='test', Ins=isInstructor(session['username']))
+                               variable='test', instructors=get_instructors(), Ins=isInstructor(session['username']))
 
     if request.method == 'POST':
-        addRegradeRequest(session['username'], "A4. "+request.form['message'])
+        addRegradeRequest(session['username'], "A4. "+request.form['message'], request.form["Instruct_name"])
         return render_template('sentremark.html',
                                Ins=isInstructor(session['username']))
 
@@ -313,12 +321,14 @@ def remarkrequesta4():
 @app.route('/remarkrequestmidterm', methods=['GET', 'POST'])
 def remarkrequestmidterm():
     if request.method == 'GET':
+        db = get_db()
+        db.row_factory = make_dicts
         return render_template('remarkrequestmidterm.html',
-                               variable='test', Ins=isInstructor(session['username']))
+                               variable='test', instructors=get_instructors(), Ins=isInstructor(session['username']))
 
     if request.method == 'POST':
         addRegradeRequest(session['username'],
-                          "Midterm. "+request.form['message'])
+                          "Midterm. "+request.form['message'], request.form["Instruct_name"])
         return render_template('sentremark.html',
                                Ins=isInstructor(session['username']))
 
@@ -326,12 +336,14 @@ def remarkrequestmidterm():
 @app.route('/remarkrequestfinal', methods=['GET', 'POST'])
 def remarkrequestfinal():
     if request.method == 'GET':
+        db = get_db()
+        db.row_factory = make_dicts
         return render_template('remarkrequestfinal.html',
-                               variable='test', Ins=isInstructor(session['username']))
+                               variable='test', instructors=get_instructors(), Ins=isInstructor(session['username']))
 
     if request.method == 'POST':
         addRegradeRequest(session['username'],
-                          "Final. "+request.form['message'])
+                          "Final. "+request.form['message'], request.form["Instruct_name"])
         return render_template('sentremark.html',
                                Ins=isInstructor(session['username']))
 
@@ -374,8 +386,8 @@ def checkRegrade():
     username = session['username']
     Ins = isInstructor(session['username'])
     requests = []
-    for request_ in get_regrade_requests():
-        requests.append(request_)
+    for request in get_regrade_requests(session['username']):
+        requests.append(request)
 
     db.close()
     return render_template('checkRegrade.html', request=requests, username=username, Ins=Ins)

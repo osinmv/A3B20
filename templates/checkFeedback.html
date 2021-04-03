@@ -20,13 +20,17 @@
             <div class="container">
                 <table>
                     <tr>
-                        <th>Student</th>
-                        <th>Feedback</th>
+                        <th>Instructor Evaluation</th>
+                        <th>Improvement</th>
+                        <th>Labs Evaluation</th>
+                        <th>Labs Improvement</th>
                     </tr>
                     {% for item in feedback %}
                     <tr>
-                        <td class="name">{{item['username']}}</td>
-                        <td>{{item['content']}}</td>
+                        <td>{{item['q1']}}</td>
+                        <td>{{item['q2']}}</td>
+                        <td>{{item['q3']}}</td>
+                        <td>{{item['q4']}}</td>
                     </tr>
                     {% endfor %}
                 </table>

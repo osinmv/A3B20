@@ -20,6 +20,13 @@
         <div class="container">
             <form action="{{ url_for('remarkrequest')}}" method="POST">
                 <p>Note: You can only submit one remark request per assessment</p>
+                <p>Select your instructor</p>
+                <table data-req="1">
+                    {% for item in instructors %}
+                    <input class="radio" type="radio" name= "Instruct_name" value="{{item['username']}}" required>
+                    <label for= "A"> {{item['username']}} </label> <br>
+                    {% endfor %}
+                </table>
                 <textarea name="message" placeholder="Enter your reason of remarking here." rows="10" cols="180"></textarea>
 
                 <br><br>
