@@ -374,8 +374,8 @@ def checkRegrade():
     username = session['username']
     Ins = isInstructor(session['username'])
     requests = []
-    for request in get_regrade_requests():
-        requests.append(request)
+    for request_ in get_regrade_requests():
+        requests.append(request_)
 
     db.close()
     return render_template('checkRegrade.html', request=requests, username=username, Ins=Ins)
