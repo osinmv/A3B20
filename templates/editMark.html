@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="../static/editMark.css">
+        <title>CSCB63 Regrade</title>
+    </head>
+
+    <body>
+        {% extends "index.html" %}
+        {% block content %}
+        <div class="content">
+            <h3>Change Grades</h3>
+            <hr class="description">
+
+
+            <div class="container">
+                <form action="{{ url_for('editMark')}}" method="POST">
+                    {% for item in mark %}
+                    <h4>Please enter marks for {{student}}</h4>
+                    <h4>If there is no change, please enter the same mark as the placeholder</h4>
+                    <h4>Please enter new marks for the A1</h4>
+                    <textarea name="newA1"  placeholder="{{item['Assignment1']}}" rows="1" cols="10"></textarea>
+
+                    <h4>Please enter new marks for the A2</h4>
+                    <textarea name="newA2"  placeholder="{{item['Assignment2']}}" rows="1" cols="10"></textarea>
+                    
+                    <h4>Please enter new marks for the A3</h4>
+                    <textarea name="newA3"  placeholder="{{item['Assignment3']}}" rows="1" cols="10"></textarea>
+
+                    <h4>Please enter new marks for the A4</h4>
+                    <textarea name="newA4"  placeholder="{{item['Assignment4']}}" rows="1" cols="10"></textarea>
+
+                    <h4>Please enter new marks for the Midterm</h4>
+                    <textarea name="newMid"  placeholder="{{item['Midterm']}}" rows="1" cols="10"></textarea>
+
+                    <h4>Please enter new marks for the FinalExam</h4>
+                    <textarea name="newFinal"  placeholder="{{item['FinalTest']}}" rows="1" cols="10"></textarea>
+                    {% endfor %}
+                    <br>
+                    <br>
+                    <input type="submit" class="block" value="Send"></input>
+                </form>
+            </div>
+        </div>
+        {% endblock %}
+    </body>
+</html>

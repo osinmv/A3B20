@@ -2,7 +2,6 @@ from flask import Flask, render_template, url_for, request, redirect, g, session
 import sqlite3
 DATABASE = './assignment3.db'
 
-
 def get_db():
     """Return database"""
     db = getattr(g, '_database', None)
@@ -56,6 +55,13 @@ def get_instructors():
     """Return instructors"""
     return query_db("""SELECT DISTINCT * FROM User 
                     WHERE User.isInstructor == 1;""",
+                    (), one=False)
+
+
+def get_students():
+    """Return instructors"""
+    return query_db("""SELECT DISTINCT * FROM User 
+                    WHERE User.isInstructor == 0;""",
                     (), one=False)
 
 
@@ -368,6 +374,44 @@ def checkRegrade():
     
     db.close()
     return render_template('checkRegrade.html', request=requests, username=username, Ins=Ins)
+
+
+@app.route('/chooseStudent', methods=['GET', 'POST'])
+def chooseStudent():
+    if request.method == 'GET':
+        db = get_db()
+        db.row_factory = make_dicts
+
+        username=session['username']
+        Ins=isInstructor(session['username'])
+        students = []
+        for student in get_students():
+            students.append(student)
+    
+        db.close()
+        return render_template('chooseStudent.html', student=students, username=username, Ins=Ins)
+    else:
+        session['student_name'] = request.form['student_name']
+        return redirect(url_for('editMark'))
+
+
+
+@app.route('/editMark', methods=['GET', 'POST'])
+def editMark():
+    if request.method == 'GET':
+        db = get_db()
+        db.row_factory = make_dicts
+        mark = get_student_marks(session['student_name'])
+
+        username=session['username']
+        Ins=isInstructor(session['username'])
+    
+        db.close()
+        return render_template('editMark.html', student = session['student_name'], mark = mark, username = username, Ins = Ins)
+    else:
+        newMark = [request.form['newA1'], request.form['newA2'], request.form['newA3'], request.form['newA4'], request.form['newMid'], request.form['newFinal']]
+        updateUserMarks(session['student_name'], newMark)
+        return render_template('assigned.html')
 
 
 if __name__ == '__main__':

@@ -82,10 +82,6 @@ p{
     font-weight: 600;
 }
 
-textarea{
-    max-width: 100%;
-}
-
 .footer{
     background-color: rgba(160, 209, 238, 0.13);
     width: 60%;
@@ -97,11 +93,6 @@ textarea{
 
 h3{
     font-size: 30px;
-}
-
-.question{
-    font-weight: bold;
-    font-size: 18px;
 }
 
 .radio{
@@ -117,7 +108,7 @@ body {
 
 .block {
     display: block;
-    width: 50%;
+    width: 15%;
     border: none;
     background-color: grey;
     padding: 15px 28px;

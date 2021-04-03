@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="../static/chooseStudent.css">
+        <title>CSCB63 Regrade</title>
+    </head>
+
+    <body>
+        {% extends "index.html" %}
+        {% block content %}
+        <div class="content">
+            <h3>Change Grades</h3>
+            <hr class="description">
+
+
+            <div class="container">
+                <form action="{{ url_for('chooseStudent')}}" method="POST">
+                    <p>Select the student to regrade</p>
+                    <table data-req="1">
+                        {% for item in student %}
+                        <input class="radio" type="radio" name= "student_name" value="{{item['username']}}" required>
+                        <label for= "A"> {{item['username']}} </label> <br>
+                        {% endfor %}
+                    </table>
+                    <input type="submit" class="block" value="Submit"></input>
+                </form>
+            </div>
+        </div>
+        {% endblock %}
+    </body>
+</html>

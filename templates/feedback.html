@@ -22,7 +22,7 @@
                     <p>Select your instructor</p>
                     <table data-req="1">
                         {% for item in instructors %}
-                        <input type="radio" name= "Instruct_name" value="{{item['username']}}" required>
+                        <input class="radio" type="radio" name= "Instruct_name" value="{{item['username']}}" required>
                         <label for= "A"> {{item['username']}} </label> <br>
                         {% endfor %}
                     </table>
