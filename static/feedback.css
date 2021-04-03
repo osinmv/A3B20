@@ -125,7 +125,7 @@ body {
   }
 
   
-  .block:hover {
+.block:hover {
     background-color: black;
     color:antiquewhite;
-  }
+}
