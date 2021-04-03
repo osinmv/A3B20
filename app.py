@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, request, redirect, g, session
 import sqlite3
 DATABASE = './assignment3.db'
 
+
 def get_db():
     """Return database"""
     db = getattr(g, '_database', None)
@@ -51,6 +52,7 @@ def get_student_marks(username: str):
                     WHERE StudentMark.username == ?;""",
                     (username,), one=True)
 
+
 def get_instructors():
     """Return instructors"""
     return query_db("""SELECT DISTINCT * FROM User 
@@ -63,7 +65,6 @@ def get_students():
     return query_db("""SELECT DISTINCT * FROM User 
                     WHERE User.isInstructor == 0;""",
                     (), one=False)
-
 
 
 def get_feedback(username: str):
@@ -231,7 +232,8 @@ def signup():
             return render_template('signup.html')
     else:
         return render_template('signup.html')
-    
+
+
 @app.route('/feedback', methods=['GET', 'POST'])
 def feedback():
     if request.method == 'GET':
@@ -239,12 +241,12 @@ def feedback():
         db.row_factory = make_dicts
 
         return render_template('feedback.html',
-                               Ins=isInstructor(session['username']) , instructors=get_instructors(),  username=session['username'])
+                               Ins=isInstructor(session['username']), instructors=get_instructors(),  username=session['username'])
     if request.method == 'POST':
-        addFeedback(request.form["Instruct_name"], request.form['teachImprove'])
+        addFeedback(request.form["Instruct_name"],
+                    request.form['teachImprove'])
         return render_template('accept.html',
                                Ins=isInstructor(session['username']),  username=session['username'])
-
 
 
 @ app.route('/logout')
@@ -252,7 +254,6 @@ def logout():
     session.pop('username', None)
     session.pop('password', None)
     return render_template('logout.html')
-
 
 
 @app.route('/studentmark')
@@ -315,7 +316,8 @@ def remarkrequestmidterm():
                                variable='test', Ins=isInstructor(session['username']))
 
     if request.method == 'POST':
-        addRegradeRequest(session['username'], "Midterm. "+request.form['message'])
+        addRegradeRequest(session['username'],
+                          "Midterm. "+request.form['message'])
         return render_template('sentremark.html',
                                Ins=isInstructor(session['username']))
 
@@ -327,7 +329,8 @@ def remarkrequestfinal():
                                variable='test', Ins=isInstructor(session['username']))
 
     if request.method == 'POST':
-        addRegradeRequest(session['username'], "Final. "+request.form['message'])
+        addRegradeRequest(session['username'],
+                          "Final. "+request.form['message'])
         return render_template('sentremark.html',
                                Ins=isInstructor(session['username']))
 
@@ -337,41 +340,42 @@ def showAllGrade():
     db = get_db()
     db.row_factory = make_dicts
 
-    username=session['username']
-    Ins=isInstructor(session['username'])
+    username = session['username']
+    Ins = isInstructor(session['username'])
     grades = []
     for grade in get_all_marks():
         grades.append(grade)
-    
+
     db.close()
     return render_template('showAllGrade.html', grade=grades, username=username, Ins=Ins)
+
 
 @app.route('/checkFeedback')
 def checkFeedback():
     db = get_db()
     db.row_factory = make_dicts
 
-    username=session['username']
-    Ins=isInstructor(session['username'])
+    username = session['username']
+    Ins = isInstructor(session['username'])
     feedbacks = []
     for feedback in get_feedback(session['username']):
         feedbacks.append(feedback)
-    
+
     db.close()
     return render_template('checkFeedback.html', feedback=feedbacks, username=username, Ins=Ins)
-    
+
 
 @app.route('/checkRegrade')
 def checkRegrade():
     db = get_db()
     db.row_factory = make_dicts
 
-    username=session['username']
-    Ins=isInstructor(session['username'])
+    username = session['username']
+    Ins = isInstructor(session['username'])
     requests = []
     for request in get_regrade_requests():
         requests.append(request)
-    
+
     db.close()
     return render_template('checkRegrade.html', request=requests, username=username, Ins=Ins)
 
@@ -382,18 +386,17 @@ def chooseStudent():
         db = get_db()
         db.row_factory = make_dicts
 
-        username=session['username']
-        Ins=isInstructor(session['username'])
+        username = session['username']
+        Ins = isInstructor(session['username'])
         students = []
         for student in get_students():
             students.append(student)
-    
+
         db.close()
         return render_template('chooseStudent.html', student=students, username=username, Ins=Ins)
     else:
         session['student_name'] = request.form['student_name']
         return redirect(url_for('editMark'))
-
 
 
 @app.route('/editMark', methods=['GET', 'POST'])
@@ -403,13 +406,14 @@ def editMark():
         db.row_factory = make_dicts
         mark = get_student_marks(session['student_name'])
 
-        username=session['username']
-        Ins=isInstructor(session['username'])
-    
+        username = session['username']
+        Ins = isInstructor(session['username'])
+
         db.close()
-        return render_template('editMark.html', student = session['student_name'], mark = mark, username = username, Ins = Ins)
+        return render_template('editMark.html', student=session['student_name'], mark=mark, username=username, Ins=Ins)
     else:
-        newMark = [request.form['newA1'], request.form['newA2'], request.form['newA3'], request.form['newA4'], request.form['newMid'], request.form['newFinal']]
+        newMark = [request.form['newA1'], request.form['newA2'], request.form['newA3'],
+                   request.form['newA4'], request.form['newMid'], request.form['newFinal']]
         updateUserMarks(session['student_name'], newMark)
         return render_template('assigned.html')
 
