@@ -18,39 +18,29 @@
 
             <p>Select your instructor</p>
 
-            <input type="radio" name= "Abbas">
-            <label for= "A"> {{instructors[0]}} </label> <br>
-
-            <input type="radio" name= "Abbas">
-            <label for= "A"> {{instructors[1]}} </label> <br>
-
-            <input type="radio" name= "Abbas">
-            <label for= "A"> {{instructors[2]}} </label> <br>
-
+            {% for item in instructors %}
+                <input type="radio" name= "Instruct_name">
+                <label for= "A"> {{item}} </label> <br>
+            {% endfor %}
 
 
             <div class="container">
                 <form action="{{ url_for('feedback')}}" method="POST">
                      <p>What do you like about the instructor teaching?</p>
-                     <textarea name="message" placeholder="Enter feedback here." rows="10" cols="180"></textarea>
+                     <textarea name="teaching" placeholder="Enter feedback here." rows="10" cols="180"></textarea>
 
-                <form action="{{ url_for('feedback')}}" method="POST">
                     <p>What do you recommend the instructor to do to improve their teaching?</p>
-                    <textarea name="message"  placeholder="Enter feedback here." rows="10" cols="180"></textarea>
+                    <textarea name="teachImprove"  placeholder="Enter feedback here." rows="10" cols="180"></textarea>
 
-                <form action="{{ url_for('feedback')}}" method="POST">
                     <p>What do you like about the labs?</p>
-                    <textarea name="message"  placeholder="Enter feedback here." rows="10" cols="180"></textarea>
+                    <textarea name="labs"  placeholder="Enter feedback here." rows="10" cols="180"></textarea>
 
-                <form action="{{ url_for('feedback')}}" method="POST">
                     <p>What do you recommend the lab instructors to do to improve their lab teaching?</p>
-                    <textarea name="message"  placeholder="Enter feedback here." rows="10" cols="180"></textarea>
+                    <textarea name="labsImprove"  placeholder="Enter feedback here." rows="10" cols="180"></textarea>
 
                 <br/>
 
-                <br><br>
-
-                <button type="button" class="block">Submit</button>
+                    <input type="submit" class="block" value="Send"></input>
                 </form>
             </div>
         </div>

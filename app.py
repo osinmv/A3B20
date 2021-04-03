@@ -54,7 +54,7 @@ def get_student_marks(username: str):
 
 def get_instructors():
     """Return instructors"""
-    return query_db("""SELECT * FROM User 
+    return query_db("""SELECT username FROM User 
                     WHERE User.isInstructor == 1;""",
                     (), one=False)
 
@@ -231,12 +231,11 @@ def signup():
 def feedback():
     if request.method == 'GET':
         return render_template('feedback.html',
-                               Ins=isInstructor(session['username']) , instructors=get_instructors())
+                               Ins=isInstructor(session['username']) , instructors=get_instructors(),  username=session['username'])
     if request.method == 'POST':
         return render_template('accept.html',
-                               Ins=isInstructor(session['username']), instructors=get_instructors())
+                               Ins=isInstructor(session['username']), instructors=get_instructors(),  username=session['username'])
 
-    
 
 
 @ app.route('/logout')
@@ -246,28 +245,21 @@ def logout():
     return render_template('logout.html')
 
 
-@app.route('/feedback', methods=['GET', 'POST'])
-def feedback():
-    if request.method == 'GET':
-        return render_template('feedback.html', Ins=isInstructor(session['username']), username=session['username'])
-    elif request.method == 'POST':
-        return render_template('accept.html', Ins=isInstructor(session['username']), username=session['username'])
-
 
 @app.route('/studentmark')
 def studentmark():
-    return render_template('studentmark.html', Ins=isInstructor(session['username']), marks=get_student_marks(session['username']))
+    return render_template('studentmark.html', Ins=isInstructor(session['username']), marks=get_student_marks(session['username']), username=session['username'])
 
 
 @app.route('/remarkrequest', methods=['GET', 'POST'])
 def remarkrequest():
     if request.method == 'GET':
-        return render_template('remarkrequest.html',
-                               variable='test', Ins=isInstructor(session['username']))
+        return render_template('remarkrequesta1.html',
+                               variable='test', Ins=isInstructor(session['username']), username=session['username'])
 
     if request.method == 'POST':
         return render_template('sentremark.html',
-                               Ins=isInstructor(session['username']))
+                               Ins=isInstructor(session['username']), username=session['username'])
 
 
 @app.route('/remarkrequesta2', methods=['GET', 'POST'])
