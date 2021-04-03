@@ -46,6 +46,10 @@
         
     {% block content %}
         <div class="content">
+            {% if Ins == True %}
+            <h3>Welcome, Instructor {{username}}.</h3>
+            <a id="allGrade" href="http://localhost:5000/showAllGrade">Click here to view all students grades</a>
+            {% endif %}
             <h3>Course Description</h3>
             <hr class="description">
             <br>

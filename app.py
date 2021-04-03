@@ -326,5 +326,19 @@ def remarkrequestfinal():
                                Ins=isInstructor(session['username']))
 
 
+@app.route('/showAllGrade')
+def showAllGrade():
+    db = get_db()
+    db.row_factory = make_dicts
+
+    username=session['username']
+    Ins=isInstructor(session['username'])
+    grades = []
+    for grade in get_all_marks():
+        grades.append(grade)
+    
+    db.close()
+    return render_template('showAllGrade.html', grade=grades, username=username, Ins=Ins)
+
 if __name__ == '__main__':
     app.run(debug=True)
