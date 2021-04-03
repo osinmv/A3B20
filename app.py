@@ -54,10 +54,9 @@ def get_student_marks(username: str):
 
 def get_instructors():
     """Return instructors"""
-    return query_db("""SELECT username FROM User 
+    return query_db("""SELECT DISTINCT * FROM User 
                     WHERE User.isInstructor == 1;""",
                     (), one=False)
-
 
 
 
@@ -230,11 +229,15 @@ def signup():
 @app.route('/feedback', methods=['GET', 'POST'])
 def feedback():
     if request.method == 'GET':
+        db = get_db()
+        db.row_factory = make_dicts
+
         return render_template('feedback.html',
                                Ins=isInstructor(session['username']) , instructors=get_instructors(),  username=session['username'])
     if request.method == 'POST':
+        addFeedback(request.form["Instruct_name"], request.form['teachImprove'])
         return render_template('accept.html',
-                               Ins=isInstructor(session['username']), instructors=get_instructors(),  username=session['username'])
+                               Ins=isInstructor(session['username']),  username=session['username'])
 
 
 
