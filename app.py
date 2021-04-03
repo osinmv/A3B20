@@ -261,6 +261,7 @@ def remarkrequest():
                                variable='test', Ins=isInstructor(session['username']), username=session['username'])
 
     if request.method == 'POST':
+        addRegradeRequest(session['username'], "A1. "+request.form['message'])
         return render_template('sentremark.html',
                                Ins=isInstructor(session['username']), username=session['username'])
 
@@ -272,6 +273,7 @@ def remarkrequesta2():
                                variable='test', Ins=isInstructor(session['username']))
 
     if request.method == 'POST':
+        addRegradeRequest(session['username'], "A2. "+request.form['message'])
         return render_template('sentremark.html',
                                Ins=isInstructor(session['username']))
 
@@ -283,6 +285,7 @@ def remarkrequesta3():
                                variable='test', Ins=isInstructor(session['username']))
 
     if request.method == 'POST':
+        addRegradeRequest(session['username'], "A3. "+request.form['message'])
         return render_template('sentremark.html',
                                Ins=isInstructor(session['username']))
 
@@ -294,6 +297,7 @@ def remarkrequesta4():
                                variable='test', Ins=isInstructor(session['username']))
 
     if request.method == 'POST':
+        addRegradeRequest(session['username'], "A4. "+request.form['message'])
         return render_template('sentremark.html',
                                Ins=isInstructor(session['username']))
 
@@ -305,6 +309,7 @@ def remarkrequestmidterm():
                                variable='test', Ins=isInstructor(session['username']))
 
     if request.method == 'POST':
+        addRegradeRequest(session['username'], "Midterm. "+request.form['message'])
         return render_template('sentremark.html',
                                Ins=isInstructor(session['username']))
 
@@ -316,6 +321,7 @@ def remarkrequestfinal():
                                variable='test', Ins=isInstructor(session['username']))
 
     if request.method == 'POST':
+        addRegradeRequest(session['username'], "Final. "+request.form['message'])
         return render_template('sentremark.html',
                                Ins=isInstructor(session['username']))
 
