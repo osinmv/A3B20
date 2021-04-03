@@ -122,16 +122,16 @@ def addUserMarks(username: str):
     VALUES (?,?,?,?,?,?,?);""", args=(username, 0, 0, 0, 0, 0, 0,))
 
 
-def addFeedback(username: str, content: str):
+def addFeedback(username: str, q1: str, q2: str, q3: str, q4: str):
     """Add content to database"""
     update_db("""INSERT INTO Feedback VALUES (?,?);""",
-              args=(username, content,))
+              args=(username, q1, q2, q3, q4,))
 
 
-def addRegradeRequest(username: str, content: str):
+def addRegradeRequest(username: str, content: str, instructor: str):
     """Add regrade request to database"""
-    update_db("""INSERT INTO RegradeRequests VALUES (?, ?);""",
-              args=(username, content,))
+    update_db("""INSERT INTO RegradeRequests VALUES (?, ?,?);""",
+              args=(username, content, instructor,))
 
 
 def updateUserMarks(username: str, marks: list):
