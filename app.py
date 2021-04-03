@@ -244,7 +244,7 @@ def feedback():
                                Ins=isInstructor(session['username']), instructors=get_instructors(),  username=session['username'])
     if request.method == 'POST':
         addFeedback(request.form["Instruct_name"],
-                    request.form['teachImprove'])
+                    request.form['teaching'] + " " + request.form['teachImprove'] + " " + request.form['labs'] + " " + request.form['labImprove'])
         return render_template('accept.html',
                                Ins=isInstructor(session['username']),  username=session['username'])
 
