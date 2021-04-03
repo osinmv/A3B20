@@ -74,9 +74,10 @@ def get_feedback(username: str):
                     args=(username,), one=False)
 
 
-def get_regrade_requests():
+def get_regrade_requests(instructor: str):
     """Return all regrade requests"""
-    return query_db("""SELECT * FROM RegradeRequests;""", (), one=False)
+    return query_db("""SELECT * FROM RegradeRequests WHERE instructor==?;""",
+                    (instructor,), one=False)
 
 
 def isUser(username: str):
