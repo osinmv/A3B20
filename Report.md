@@ -19,3 +19,15 @@
 
 
 ## Haowen Chang  (33%)
+
+- All python functions not related to database and signup, studentmark
+
+- Edit all html files to enable them to communicate with database other than signup.html
+
+- Access restrictions
+
+- All css codes except login.css
+
+- Re-edit the index.html to change the navigation bar to appear different to instructors and students
+
+- All html files that Instructor users can visit
