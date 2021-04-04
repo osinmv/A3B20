@@ -1,5 +1,5 @@
-from flask import Flask, render_template, url_for, request, redirect, g, session
 import sqlite3
+from flask import Flask, render_template, url_for, request, redirect, g, session
 DATABASE = './assignment3.db'
 
 
@@ -169,14 +169,18 @@ def index():
     # close the database if we are connected to it
     #    db.close()
     if 'username' in session:
-        return render_template("index.html", Ins=isInstructor(session['username']), username=session['username'])
+        return render_template("index.html",
+                               Ins=isInstructor(session['username']),
+                               username=session['username'])
     return redirect(url_for('login'))
 
 
 @app.route('/announcement')
 def announcement():
     if 'username' in session:
-        return render_template('announcement.html', Ins=isInstructor(session['username']), username=session['username'])
+        return render_template('announcement.html',
+                               Ins=isInstructor(session['username']),
+                               username=session['username'])
     return redirect(url_for('login'))
 
 
@@ -190,28 +194,36 @@ def piazza():
 @app.route('/calendar')
 def calendar():
     if 'username' in session:
-        return render_template('calendar.html', Ins=isInstructor(session['username']), username=session['username'])
+        return render_template('calendar.html',
+                               Ins=isInstructor(session['username']),
+                               username=session['username'])
     return redirect(url_for('login'))
 
 
 @app.route('/lecture')
 def lecture():
     if 'username' in session:
-        return render_template('lecture.html', Ins=isInstructor(session['username']), username=session['username'])
+        return render_template('lecture.html',
+                               Ins=isInstructor(session['username']),
+                               username=session['username'])
     return redirect(url_for('login'))
 
 
 @app.route('/tutorial')
 def tutorial():
     if 'username' in session:
-        return render_template('tutorial.html', Ins=isInstructor(session['username']), username=session['username'])
+        return render_template('tutorial.html',
+                               Ins=isInstructor(session['username']),
+                               username=session['username'])
     return redirect(url_for('login'))
 
 
 @app.route('/assignment')
 def assignment():
     if 'username' in session:
-        return render_template('assignment.html', Ins=isInstructor(session['username']), username=session['username'])
+        return render_template('assignment.html',
+                               Ins=isInstructor(session['username']),
+                               username=session['username'])
     return redirect(url_for('login'))
 
 
@@ -235,7 +247,6 @@ def login():
 @app.route('/notExist')
 def notExist():
     return render_template('notExist.html')
-
 
 
 @app.route('/signup', methods=["GET", "POST"])
@@ -263,13 +274,18 @@ def feedback():
             db.row_factory = make_dicts
 
             return render_template('feedback.html',
-                                Ins=isInstructor(session['username']), instructors=get_instructors(),  username=session['username'])
+                                   Ins=isInstructor(session['username']),
+                                   instructors=get_instructors(),
+                                   username=session['username'])
         if request.method == 'POST':
             addFeedback(request.form["Instruct_name"],
-                        request.form['teaching'], request.form['teachImprove'], request.form['labs'], request.form['labImprove'])
+                        request.form['teaching'], request.form['teachImprove'],
+                        request.form['labs'], request.form['labImprove'])
             return render_template('accept.html',
-                                Ins=isInstructor(session['username']),  username=session['username'])
+                                   Ins=isInstructor(session['username']),
+                                   username=session['username'])
     return redirect(url_for('login'))
+
 
 @ app.route('/logout')
 def logout():
@@ -283,7 +299,10 @@ def studentmark():
     if 'username' in session:
         if isInstructor(session['username']):
             return redirect(url_for('notStudent'))
-        return render_template('studentmark.html', Ins=isInstructor(session['username']), marks=get_student_marks(session['username']), username=session['username'])
+        return render_template('studentmark.html',
+                               Ins=isInstructor(session['username']),
+                               marks=get_student_marks(session['username']),
+                               username=session['username'])
     return redirect(url_for('login'))
 
 
@@ -296,12 +315,18 @@ def remarkrequest():
             db = get_db()
             db.row_factory = make_dicts
             return render_template('remarkrequesta1.html',
-                                variable='test', instructors=get_instructors(), Ins=isInstructor(session['username']), username=session['username'])
+                                   variable='test',
+                                   instructors=get_instructors(),
+                                   Ins=isInstructor(session['username']),
+                                   username=session['username'])
 
         if request.method == 'POST':
-            addRegradeRequest(session['username'], "A1. "+request.form['message'], request.form["Instruct_name"])
+            addRegradeRequest(
+                session['username'], "A1. "+request.form['message'],
+                request.form["Instruct_name"])
             return render_template('sentremark.html',
-                                Ins=isInstructor(session['username']), username=session['username'])
+                                   Ins=isInstructor(session['username']),
+                                   username=session['username'])
     return redirect(url_for('login'))
 
 
@@ -314,12 +339,16 @@ def remarkrequesta2():
             db = get_db()
             db.row_factory = make_dicts
             return render_template('remarkrequesta2.html',
-                                variable='test', instructors=get_instructors(), Ins=isInstructor(session['username']))
+                                   variable='test',
+                                   instructors=get_instructors(),
+                                   Ins=isInstructor(session['username']))
 
         if request.method == 'POST':
-            addRegradeRequest(session['username'], "A2. "+request.form['message'], request.form["Instruct_name"])
+            addRegradeRequest(
+                session['username'], "A2. "+request.form['message'],
+                request.form["Instruct_name"])
             return render_template('sentremark.html',
-                                Ins=isInstructor(session['username']))
+                                   Ins=isInstructor(session['username']))
     return redirect(url_for('login'))
 
 
@@ -332,12 +361,16 @@ def remarkrequesta3():
             db = get_db()
             db.row_factory = make_dicts
             return render_template('remarkrequesta3.html',
-                                variable='test', instructors=get_instructors(), Ins=isInstructor(session['username']))
+                                   variable='test',
+                                   instructors=get_instructors(),
+                                   Ins=isInstructor(session['username']))
 
         if request.method == 'POST':
-            addRegradeRequest(session['username'], "A3. "+request.form['message'], request.form["Instruct_name"])
+            addRegradeRequest(
+                session['username'], "A3. "+request.form['message'],
+                request.form["Instruct_name"])
             return render_template('sentremark.html',
-                                Ins=isInstructor(session['username']))
+                                   Ins=isInstructor(session['username']))
     return redirect(url_for('login'))
 
 
@@ -350,12 +383,16 @@ def remarkrequesta4():
             db = get_db()
             db.row_factory = make_dicts
             return render_template('remarkrequesta4.html',
-                                variable='test', instructors=get_instructors(), Ins=isInstructor(session['username']))
+                                   variable='test',
+                                   instructors=get_instructors(),
+                                   Ins=isInstructor(session['username']))
 
         if request.method == 'POST':
-            addRegradeRequest(session['username'], "A4. "+request.form['message'], request.form["Instruct_name"])
+            addRegradeRequest(
+                session['username'], "A4. "+request.form['message'],
+                request.form["Instruct_name"])
             return render_template('sentremark.html',
-                                Ins=isInstructor(session['username']))
+                                   Ins=isInstructor(session['username']))
     return redirect(url_for('login'))
 
 
@@ -368,13 +405,16 @@ def remarkrequestmidterm():
             db = get_db()
             db.row_factory = make_dicts
             return render_template('remarkrequestmidterm.html',
-                                variable='test', instructors=get_instructors(), Ins=isInstructor(session['username']))
+                                   variable='test',
+                                   instructors=get_instructors(),
+                                   Ins=isInstructor(session['username']))
 
         if request.method == 'POST':
             addRegradeRequest(session['username'],
-                            "Midterm. "+request.form['message'], request.form["Instruct_name"])
+                              "Midterm. "+request.form['message'],
+                              request.form["Instruct_name"])
             return render_template('sentremark.html',
-                                Ins=isInstructor(session['username']))
+                                   Ins=isInstructor(session['username']))
     return redirect(url_for('login'))
 
 
@@ -387,13 +427,16 @@ def remarkrequestfinal():
             db = get_db()
             db.row_factory = make_dicts
             return render_template('remarkrequestfinal.html',
-                                variable='test', instructors=get_instructors(), Ins=isInstructor(session['username']))
+                                   variable='test',
+                                   instructors=get_instructors(),
+                                   Ins=isInstructor(session['username']))
 
         if request.method == 'POST':
             addRegradeRequest(session['username'],
-                            "Final. "+request.form['message'], request.form["Instruct_name"])
+                              "Final. "+request.form['message'],
+                              request.form["Instruct_name"])
             return render_template('sentremark.html',
-                                Ins=isInstructor(session['username']))
+                                   Ins=isInstructor(session['username']))
     return redirect(url_for('login'))
 
 
@@ -412,7 +455,8 @@ def showAllGrade():
             grades.append(grade)
 
         db.close()
-        return render_template('showAllGrade.html', grade=grades, username=username, Ins=Ins)
+        return render_template('showAllGrade.html', grade=grades,
+                               username=username, Ins=Ins)
     return redirect(url_for('login'))
 
 
@@ -431,7 +475,8 @@ def checkFeedback():
             feedbacks.append(feedback)
 
         db.close()
-        return render_template('checkFeedback.html', feedback=feedbacks, username=username, Ins=Ins)
+        return render_template('checkFeedback.html',
+                               feedback=feedbacks, username=username, Ins=Ins)
     return redirect(url_for('login'))
 
 
@@ -450,7 +495,8 @@ def checkRegrade():
             requests.append(request)
 
         db.close()
-        return render_template('checkRegrade.html', request=requests, username=username, Ins=Ins)
+        return render_template('checkRegrade.html', request=requests,
+                               username=username, Ins=Ins)
     return redirect(url_for('login'))
 
 
@@ -473,7 +519,8 @@ def chooseStudent():
                 students.append(student)
 
             db.close()
-            return render_template('chooseStudent.html', student=students, username=username, Ins=Ins)
+            return render_template('chooseStudent.html', student=students,
+                                   username=username, Ins=Ins)
         else:
             session['student_name'] = request.form['student_name']
             return redirect(url_for('editMark'))
@@ -496,10 +543,14 @@ def editMark():
             Ins = isInstructor(session['username'])
 
             db.close()
-            return render_template('editMark.html', student=session['student_name'], mark=mark, username=username, Ins=Ins)
+            return render_template('editMark.html',
+                                   student=session['student_name'], mark=mark,
+                                   username=username, Ins=Ins)
         else:
-            newMark = [request.form['newA1'], request.form['newA2'], request.form['newA3'],
-                    request.form['newA4'], request.form['newMid'], request.form['newFinal']]
+            newMark = [request.form['newA1'], request.form['newA2'],
+                       request.form['newA3'],
+                       request.form['newA4'], request.form['newMid'],
+                       request.form['newFinal']]
             updateUserMarks(session['student_name'], newMark)
             session.pop('student_name', None)
             return render_template('assigned.html')
@@ -514,6 +565,7 @@ def notIns():
         return render_template('notIns.html')
     return redirect(url_for('login'))
 
+
 @app.route('/notStudent')
 def notStudent():
     if 'username' in session:
@@ -521,6 +573,7 @@ def notStudent():
             return redirect(url_for('notIns'))
         return render_template('notStudent.html')
     return redirect(url_for('login'))
+
 
 if __name__ == '__main__':
     app.run(debug=True)
