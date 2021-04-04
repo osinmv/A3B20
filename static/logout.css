@@ -48,10 +48,10 @@ button{
 }
 
 button:hover{
-    color: antiquewhite;
+    color: rgba(54, 54, 54, 0.897);
 }
 
 button:active{
-    color: antiquewhite;
+    color: rgba(54, 54, 54, 0.897);
     border: 1px solid antiquewhite;
 }
